@@ -5,18 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="//fdn.fontcdn.ir">
+    <link rel="preconnect" href="//v1.fontapi.ir">
+    <link href="https://v1.fontapi.ir/css/Vazir" rel="stylesheet">
+    
     <link rel="stylesheet" href="{{ URL::asset('/css/main.css') }}" />
 
     <title>Todo's list</title>
 </head>
-<body>
+<body class="container">
     <div class="head">
-        <h1>List index here:</h1>
+        <h1>Add todo:</h1>
+        <br>
         <form action={{route('todo.store')}} method="POST">
             @csrf
             <input type="text" name="title" placeholder="Enter title here">
+            <input type="text" name="author" placeholder="Enter author here">
+            <textarea name="description" cols="30" rows="10"></textarea>
+
             <input type="text" name="done" value="0" hidden>
-            <input type="submit" value="Save">
+            <input type="submit" class="save" value="Save">
         </form>
     
     </div>
@@ -29,11 +38,12 @@
             <h2>{{$todo->title}}</h2>
             
             <h5>{{$todo->description}}</h5>
+            <br>
             <p>{{$todo->author}}</p>
-  
-            <input onchange="update_done(this.checked , {{$todo->id}})" class="todo_done" style="margin: 0;" name="done" type="checkbox" {{($todo->done) ? 'checked' : ''}} >
-            
-            <input type="submit" onclick="delete_todo({{$todo->id}} , this)" value="delete">
+            <br>
+            <label for="">Done: </label><input onchange="update_done(this.checked , {{$todo->id}})" class="todo_done" style="margin: 0;" name="done" type="checkbox" {{($todo->done) ? 'checked' : ''}} >
+            <br>
+            <input class="delete" type="submit" onclick="delete_todo({{$todo->id}} , this)" value="delete">
 
         </div>
     @endforeach
