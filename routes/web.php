@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TodoListController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,6 @@ Route::resource('/todo' , TodoListController::class);
 
 Route::post('/update_todo_done',[TodoListController::class, 'update']);
 Route::post('/delete_todo',[TodoListController::class, 'destroy']);
+
+
+Route::resource('/register' , RegisterController::class);
