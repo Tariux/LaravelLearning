@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TodoListController;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,9 @@ Route::post('/update_todo_done',[TodoListController::class, 'update']);
 Route::post('/delete_todo',[TodoListController::class, 'destroy']);
 
 
-Route::resource('/register' , RegisterController::class);
+Route::resource('register' , RegisterController::class);
+Route::resource('login' , LoginController::class);
+
+Route::post('login', [LoginController::class, 'doLogin'])->name('do.login');
+
+Route::get('logout', [LoginController::class, 'logout'])->name('do.logout');
