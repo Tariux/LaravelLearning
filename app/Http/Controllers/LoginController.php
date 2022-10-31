@@ -41,15 +41,19 @@ class LoginController extends Controller
     {
         $request->validate([
             'email' => 'required',
-            'password' => 'required',
+            'password' => 'required'
         ]);
    
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials , false)) {
             return redirect()->intended('todo')
                         ->withSuccess('Signed in');
         }
-  
+        dd([
+            Auth::attempt($credentials),
+            $request,
+            $credentials
+        ]);
         return redirect("login")->withSuccess('Login details are not valid');
     }
     public function logout()
