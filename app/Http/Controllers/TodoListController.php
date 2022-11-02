@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\TodoList;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TodoListController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('auth');
+}
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +22,9 @@ class TodoListController extends Controller
     public function index()
     {
 
-        $todos = TodoList::all()->sortByDesc('created_at');
-        return view('todos' , compact('todos'));
+        $user_data = Auth::user();
+        $todos = TodoList::all()->where('author' , $user_data->email)->sortByDesc('created_at');
+        return view('todos' , compact('todos' , 'user_data'));
     }
 
     /**

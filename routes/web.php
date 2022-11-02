@@ -32,7 +32,8 @@ Route::post('/delete_todo',[TodoListController::class, 'destroy']);
 
 Route::resource('register' , RegisterController::class);
 
-Route::resource('login' , LoginController::class);
+Route::resource('login' , LoginController::class, ['name' => 'login']);
+Route::get('login', [LoginController::class, 'index'])->name('login');
 
 Route::post('check', [LoginController::class, 'doLogin'])->name('do.login');
 

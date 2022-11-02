@@ -16,12 +16,15 @@
 </head>
 <body class="container">
     <div class="head">
+        {{
+            $user_data
+        }}
         <h1>Add todo:</h1>
         <br>
         <form action={{route('todo.store')}} method="POST">
             @csrf
             <input type="text" name="title" placeholder="Enter title here">
-            <input type="text" name="author" placeholder="Enter author here">
+            <input type="text" name="author" value="{{$user_data->email}}" hidden>
             <textarea name="description" cols="30" rows="10"></textarea>
 
             <input type="text" name="done" value="0" hidden>
